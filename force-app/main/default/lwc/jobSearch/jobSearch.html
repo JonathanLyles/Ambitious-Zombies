@@ -2,7 +2,7 @@
     <lightning-card title="Job Search">
         <div class="slds-p-around_medium">
             <!-- Input fields -->
-            <lightning-input 
+            <lightning-input sf
                 label="Keywords" 
                 value={keywords} 
                 data-field="keywords">
@@ -51,11 +51,11 @@
                 key-field="id"
                 data={jobs}
                 columns={columns}
-                class="slds-m-top_medium">
+                selected-rows={selectedRows}
+                class="slds-m-top_medium"
+                data-id="jobTable">
             </lightning-datatable>
-        </template>
-        <template if:false={jobs.length}>
-            <p class="slds-text-body_small slds-m-top_medium">No jobs found yet.</p>
+            <lightning-button label="Save Selected Jobs" title="Save Selected Jobs" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
         </template>
     </lightning-card>
 </template>

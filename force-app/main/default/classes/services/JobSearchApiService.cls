@@ -3,9 +3,12 @@ public with sharing class JobSearchApiService {
         // Step 1: Get the Api strategy for the given API name
         IJobSearchApiCalloutStrategy apiCalloutStrategy = JobSearchApiCalloutStrategyFactory.getStrategy(params.get('apiName'));  
         // Step 2: Execute the API call
-        try{
+        try{            
             HttpResponse httpResponse = apiCalloutStrategy.execute(params);
-            if (httpResponse.getStatusCode() >= 200 || httpResponse.getStatusCode() <= 299){
+            if(httpResponse == null){
+                throw new JobSearchApiServiceException('Invalid Strategy');
+            }
+            if (httpResponse.getStatusCode() >= 200 && httpResponse.getStatusCode() <= 299){
                 // Step 3: Get the job board response strategy for the given API name.
                 IJobBoardResponseStrategy responseStrategy = JobBoardResponseStrategyFactory.getStrategy(params.get('apiName'));
                 // Step 4: Parse the response from the API call into the job board response wrapper
@@ -19,12 +22,15 @@ public with sharing class JobSearchApiService {
                     SearchId__c = params.get('searchId'),
                     Payload__c = JSON.serialize(records)
                 );
-                EventBus.publish(event);
-                System.debug(event);            }else{
+                EventBus.publish(event);           
+            }else{
                 throw new CalloutException('API call failed: ' + httpResponse.getBody());
             }
+        
         }catch(CalloutException e){
             publishErrorEvent(params.get('searchId'), e.getMessage());
+        }catch(Exception e){
+            System.debug(e.getMessage());
         }
     }
 
@@ -35,4 +41,6 @@ public with sharing class JobSearchApiService {
         );
         EventBus.publish(event);
     }
+
+    public class JobSearchApiServiceException extends Exception {}
 }

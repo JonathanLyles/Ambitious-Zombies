@@ -6,6 +6,10 @@ public with sharing class MetadataDrivenApiStrategy implements IJobSearchApiCall
     }
 
     public HttpResponse execute(Map<String, String> params) {
+        if(config.Http_Method__c == null || config.Named_Credential__c == null){
+            return null;
+        }
+
         HttpRequest req = new HttpRequest();
         req.setMethod(config.Http_Method__c);
         req.setEndpoint('callout:' + config.Named_Credential__c);
