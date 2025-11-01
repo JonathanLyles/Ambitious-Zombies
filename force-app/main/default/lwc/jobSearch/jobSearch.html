@@ -1,0 +1,61 @@
+<template>
+    <lightning-card title="Job Search">
+        <div class="slds-p-around_medium">
+            <!-- Input fields -->
+            <lightning-input sf
+                label="Keywords" 
+                value={keywords} 
+                data-field="keywords">
+            </lightning-input>
+            <lightning-input 
+                label="Location" 
+                value={location} 
+                data-field="location">
+            </lightning-input>
+            <lightning-input 
+                label="Salary" 
+                value={salary} 
+                data-field="salary">
+            </lightning-input>
+            <lightning-combobox
+                name="jobboard"
+                label="Job Board"
+                value={jobBoard}
+                placeholder="Select Job Board"
+                options={jobBoardOptions}
+                data-field="jobBoard">
+            </lightning-combobox>
+            <!-- Search button -->
+            <lightning-button 
+                label="Search" 
+                onclick={handleSearch} 
+                class="slds-m-top_small"
+                disabled={isLoading}>
+            </lightning-button>
+        </div>
+        <!-- Loading spinner -->
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium slds-text-align_center">
+                <lightning-spinner alternative-text="Searching jobs..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <!-- Error message -->
+        <template if:true={error}>
+            <div class="slds-p-around_medium slds-text-color_error">
+                {error}
+            </div>
+        </template>
+        <!-- Jobs Table -->
+        <template if:true={jobs.length}>
+            <lightning-datatable
+                key-field="id"
+                data={jobs}
+                columns={columns}
+                selected-rows={selectedRows}
+                class="slds-m-top_medium"
+                data-id="jobTable">
+            </lightning-datatable>
+            <lightning-button label="Save Selected Jobs" title="Save Selected Jobs" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        </template>
+    </lightning-card>
+</template>

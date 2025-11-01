@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Body_Template__c</fullName>
+    <description>Dynamic Body Template. Must be valid JSON</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Body Template</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>
