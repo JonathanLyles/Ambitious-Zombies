@@ -1,14 +1,22 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import jobService from 'c/jobService';
 import saveJobs from '@salesforce/apex/FindNewJobsController.saveJobs';
 import Toast from 'lightning/toast';
 
 export default class JobSearch extends LightningElement {
-    jobs = [];
+    @track jobs = [];
+    @track paginatedData = [];
+
+    //Search parameters
     keywords = '';
     location = '';
     salary = '';
     apiName = '';
+
+    //Pagination parameters
+    currentPage = 1;
+    pageSize = 10;
+    totalPages = 0;
 
     jobBoardOptions = [
         { label: 'Jooble', value: 'Jooble' }
@@ -37,7 +45,7 @@ export default class JobSearch extends LightningElement {
                         (parsed.Companies || []).map(c => [c.Id, c.Company_Name__c])
                     );
 
-                    // Extra only the Jobs array
+                    // Extract only the Jobs array
                     // Merge company names into job records
                     this.jobs = (parsed.Jobs || []).map(job => ({
                         ...job,
@@ -49,10 +57,43 @@ export default class JobSearch extends LightningElement {
                     console.error('Error parsing JobList__c JSON: ', err);
                 }
             }
+            if(this.jobs){
+                console.log('contents of this.jobs', this.jobs);
+                this.totalPages = Math.ceil(this.jobs.length / this.pageSize);
+                this.updatePaginatedData();
+            }
         });
+        
     }
 
- 
+    updatePaginatedData(){
+        const start = (this.currentPage - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        this.paginatedData = this.jobs.slice(start, end);
+        console.log('contents of paginatedData: ', this.paginatedData)
+    }
+
+    handlePrevious() {
+        if (this.currentPage > 1) {
+            this.currentPage--;
+            this.updatePaginatedData();
+        }
+    }
+
+    handleNext() {
+        if (this.currentPage < this.totalPages) {
+            this.currentPage++;
+            this.updatePaginatedData();
+        }
+    }
+
+    get isPreviousDisabled() {
+        return this.currentPage === 1;
+    }
+
+    get isNextDisabled() {
+        return this.currentPage === this.totalPages;
+    }
 
     handleSearch() {
         console.log('Inside handleSearch()');
