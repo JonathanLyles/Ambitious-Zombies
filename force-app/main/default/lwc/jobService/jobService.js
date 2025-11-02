@@ -51,7 +51,6 @@ const jobService = {
         });
     },
 
-
     /**
      * Initialize the service (optional)
      */

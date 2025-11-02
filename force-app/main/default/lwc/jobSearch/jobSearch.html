@@ -46,15 +46,20 @@
             </div>
         </template>
         <!-- Jobs Table -->
-        <template if:true={jobs.length}>
+        <template if:true={paginatedData.length}>
             <lightning-datatable
                 key-field="id"
-                data={jobs}
+                data={paginatedData}
                 columns={columns}
                 selected-rows={selectedRows}
                 class="slds-m-top_medium"
                 data-id="jobTable">
             </lightning-datatable>
+            <div class="slds-align_absolute-center slds-m-top_medium">
+                <lightning-button label="Previous" onclick={handlePrevious} disabled={isPreviousDisabled}></lightning-button>
+                <span class="slds-m-horizontal_medium">Page {currentPage} of {totalPages}</span>
+                <lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+            </div>
             <lightning-button label="Save Selected Jobs" title="Save Selected Jobs" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
         </template>
     </lightning-card>
