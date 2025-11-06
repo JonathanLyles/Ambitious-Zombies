@@ -17,6 +17,11 @@
                 <label>Saved</label>
             </value>
             <value>
+                <fullName>Applying</fullName>
+                <default>false</default>
+                <label>Applying</label>
+            </value>
+            <value>
                 <fullName>Applied</fullName>
                 <default>false</default>
                 <label>Applied</label>
@@ -27,24 +32,19 @@
                 <label>Interviewing</label>
             </value>
             <value>
-                <fullName>Offer Received</fullName>
+                <fullName>Negotiating</fullName>
                 <default>false</default>
-                <label>Offer Received</label>
+                <label>Negotiating</label>
             </value>
             <value>
-                <fullName>Closed - Offer Declined</fullName>
+                <fullName>Accepted</fullName>
                 <default>false</default>
-                <label>Closed - Offer Declined</label>
+                <label>Accepted</label>
             </value>
             <value>
-                <fullName>Closed - Offer Accepted</fullName>
+                <fullName>Closed</fullName>
                 <default>false</default>
-                <label>Closed - Offer Accepted</label>
-            </value>
-            <value>
-                <fullName>Closed - No offer</fullName>
-                <default>false</default>
-                <label>Closed - No offer</label>
+                <label>Closed</label>
             </value>
         </valueSetDefinition>
     </valueSet>
