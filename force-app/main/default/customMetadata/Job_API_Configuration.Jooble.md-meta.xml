@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Jooble</label>
+    <protected>false</protected>
+    <values>
+        <field>Body_Template__c</field>
+        <value xsi:type="xsd:string">{&quot;keywords&quot;:&quot;{keywords}&quot;,&quot;location&quot;:&quot;{location}&quot;,&quot;salary&quot;:{salary}}</value>
+    </values>
+    <values>
+        <field>Headers__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Http_Method__c</field>
+        <value xsi:type="xsd:string">POST</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Named_Credential__c</field>
+        <value xsi:type="xsd:string">JOOBLE_NAMED_CREDENTIAL</value>
+    </values>
+</CustomMetadata>
