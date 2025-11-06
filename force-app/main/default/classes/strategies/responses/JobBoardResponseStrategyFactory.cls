@@ -7,4 +7,4 @@ public with sharing class JobBoardResponseStrategyFactory {
         }
         return (IJobBoardResponseStrategy)t.newInstance();
     }
-} 
+}

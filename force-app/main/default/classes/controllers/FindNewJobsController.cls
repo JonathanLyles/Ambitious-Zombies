@@ -19,6 +19,7 @@ public with sharing class FindNewJobsController {
         params.put('salary', salary);
         params.put('apiName', apiName);
         
+        System.debug('location is: ' + params.get('location'));
         FindNewJobsFacade.findJobs(params);
         return params.get('searchId');
     }

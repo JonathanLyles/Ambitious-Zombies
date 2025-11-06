@@ -13,5 +13,9 @@
     "**/Thumbs.db": true,
     ".mule": true
   },
-  "xml.preferences.showSchemaDocumentationType": "none"
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "sarif-viewer.connectToGithubCodeScanning": "off",
+  "salesforce.einsteinForDevelopers.enableAutocompletions": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
